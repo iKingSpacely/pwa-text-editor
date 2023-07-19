@@ -2,9 +2,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
+// TODO: Add and configure workbox plugins for a service worker and manifest file. //DONE
+// TODO: Add CSS loaders and babel to webpack. //DONE
 
 module.exports = () => {
   return {
@@ -19,29 +20,33 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './index.html',
-        title: 'Webpack Plugin',
+        template: './index.html'
       }),
-      new MiniCssExtractPlugin(),
       new InjectManifest({
-  
-        swWRc: './src-sw.js',
-        swDest: './src-sw.js',
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
-        name: 'Contact Card',
-        short_name: 'Contact Card',
-        description: 'Call me maybe',
+        name: 'Just Another Text Editor',
+        short_name: 'J.A.T.E.',
+        description: 'A simple text editor for your browser.',
         background_color: '#7eb4e2',
         theme_color: '#7eb4e2',
         start_url: './',
         publicPath: './',
+        inject: true,
+        fingerprints: false,
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
+          {
+            src: path.resolve('favicon.ico'),
+            size: '64x64',
+            destination: path.join('assets', 'icons'),
+          }
         ],
       }),
     ],
@@ -50,23 +55,20 @@ module.exports = () => {
       rules: [
         {
           test: /\.css$/i,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
-        },
-        {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.m?js$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ["@babel/plugin-transform-runtime","@babel/plugin-proposal-class-properties"]
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
         },
+        
       ],
     },
   };
