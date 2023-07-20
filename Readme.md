@@ -19,7 +19,7 @@ Welcome to J.A.T.E.! J.A.T.E., otherwise known as Just Another Text Editor, is a
 To use J.A.T.E. on your desktop, just open it up from your localhost browser page and click on the three dots (or kabob) in the top right. Scroll down to the “Install” option and click. Once finished installing, it will appear as a desktop icon that you can click into. If you don’t want to install on desktop, just use it on your browser after running the following commands: npm i -> npm start dev.
 
 ## Contributions
-N/A
+Adam C is the only contributor
 
 ## Usage
 For taking notes or creating to do lists.
