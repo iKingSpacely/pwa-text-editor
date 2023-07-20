@@ -30,7 +30,7 @@ export const putDb = async (content)  => {
 // TODO: Add logic for a method that gets all the content from the database
 
 //what goes inside of this async () ?
-export const getDb = async () => {console.error('getDb not implemented');
+export const getDb = async () => {console.log('getDb not implemented');
   const jateDb = await openDB('jate', 1);
 
 // Create a new transaction and specify the database and data privileges.
@@ -45,7 +45,7 @@ export const getDb = async () => {console.error('getDb not implemented');
 // Get confirmation of the request.
   const result = await request;
     console.log('result.value', result.value);
-      return result[0].value;
+      return result.value;
 };
 
 initdb();
